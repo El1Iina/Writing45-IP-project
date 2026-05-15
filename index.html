@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的竖版网页</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#eee;padding:20px;}
+/* 标准竖版A4尺寸 */
+.a4-page{
+  width:210mm;
+  height:297mm;
+  margin:0 auto;
+  padding:40px;
+  background:#fff;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  font-family:"Microsoft Yahei",sans-serif;
+}
+.jump-button{
+  display:inline-block;
+  margin-top:50px;
+  padding:12px 30px;
+  background:#4285F4;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+}
+.jump-button:hover{background:#3367D6;}
+</style>
+</head>
+<body>
+<div class="a4-page">
+  <h1>我的竖版网页 - 首页</h1>
+  <p>这里的文字你之后可以随时在 GitHub 上修改替换。</p>
+  <!-- 点击跳转到第二页的按钮 -->
+  <a href="page2.html" class="jump-button">点击跳转到第二页</a>
+</div>
+</body>
+</html>
