@@ -76,7 +76,8 @@
         /* 自定义页眉大图 */
         .header{
             width: 100%;
-            height: 600px;
+            min-height: 100vh;
+            height: 100vh;
             background: url("WR45_headerimage.png") no-repeat center center;
             background-size: cover;
             display: flex;
@@ -181,7 +182,7 @@
         @media(max-width:768px){
             .top-nav{padding:12px 15px;flex-wrap:wrap;gap:10px;}
             .nav-menu{gap:12px;}
-            .header{height:220px;}
+            .header{height:60vh;min-height:auto;}
             .search-box{width:90%;}
             .container{flex-direction:column;}
         }
