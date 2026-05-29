@@ -169,28 +169,139 @@
             font-size:17px;
         }
 
-        /* 侧边栏 完全还原截图 */
-        .sidebar{flex:1;}
-        .side-box{
+        /* 侧边栏 */
+        .sidebar{flex:1;min-width:0;}
+
+        /* ===== DION AI Chat Widget ===== */
+        .dion-chat{
             background:#fff;
-            padding:20px;
-            margin-bottom:20px;
-            border-radius:4px;
-            box-shadow:0 2px 5px #ddd;
+            border-radius:16px;
+            box-shadow:0 4px 24px rgba(214,51,108,0.13);
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            height:600px;
+            position:sticky;
+            top:80px;
         }
-        .side-box h3{
-            border-left:4px solid #d6336c;
-            padding-left:10px;
-            margin-bottom:15px;
+        .dion-header{
+            background:linear-gradient(135deg,#d6336c 0%,#b5294f 100%);
+            padding:16px 18px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            flex-shrink:0;
+        }
+        .dion-avatar{
+            width:40px;height:40px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.25);
+            display:flex;align-items:center;justify-content:center;
             font-size:20px;
+            flex-shrink:0;
         }
-        .side-box ul{list-style:none;padding-left:0;}
-        .side-box li{margin:8px 0;font-size:17px;}
-        .side-box a{
-            color:#555;
-            text-decoration:none;
+        .dion-header-info{flex:1;}
+        .dion-name{
+            color:#fff;font-weight:700;font-size:16px;line-height:1.2;
         }
-        .side-box a:hover{color:#d6336c;}
+        .dion-status{
+            color:rgba(255,255,255,0.8);font-size:12px;
+            display:flex;align-items:center;gap:5px;
+        }
+        .status-dot{
+            width:7px;height:7px;border-radius:50%;
+            background:#4ade80;display:inline-block;
+            animation:pulse 2s infinite;
+        }
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+        /* 消息区 */
+        .dion-messages{
+            flex:1;overflow-y:auto;padding:16px;
+            display:flex;flex-direction:column;gap:12px;
+            scroll-behavior:smooth;
+        }
+        .dion-messages::-webkit-scrollbar{width:4px;}
+        .dion-messages::-webkit-scrollbar-thumb{background:#f0c0d0;border-radius:4px;}
+
+        .msg{display:flex;gap:8px;align-items:flex-end;}
+        .msg.user{flex-direction:row-reverse;}
+
+        .msg-avatar{
+            width:28px;height:28px;border-radius:50%;
+            background:#f3a8c0;display:flex;align-items:center;
+            justify-content:center;font-size:13px;flex-shrink:0;
+        }
+        .msg.user .msg-avatar{background:#d6336c;color:#fff;}
+
+        .msg-bubble{
+            max-width:82%;padding:10px 14px;
+            border-radius:18px;font-size:14px;line-height:1.6;
+            color:#333;word-break:break-word;
+        }
+        .msg.ai .msg-bubble{
+            background:#f7f7f8;border-bottom-left-radius:4px;
+        }
+        .msg.user .msg-bubble{
+            background:#d6336c;color:#fff;border-bottom-right-radius:4px;
+        }
+        .msg-time{
+            font-size:11px;color:#bbb;margin-top:3px;
+            text-align:right;
+        }
+        .msg.ai .msg-time{text-align:left;}
+
+        /* 打字动画 */
+        .typing-indicator{display:flex;gap:4px;padding:10px 14px;
+            background:#f7f7f8;border-radius:18px;border-bottom-left-radius:4px;
+            width:fit-content;
+        }
+        .typing-indicator span{
+            width:7px;height:7px;border-radius:50%;background:#ccc;
+            animation:typing 1.2s infinite;
+        }
+        .typing-indicator span:nth-child(2){animation-delay:0.2s;}
+        .typing-indicator span:nth-child(3){animation-delay:0.4s;}
+        @keyframes typing{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-6px);}}
+
+        /* 快捷提问 */
+        .dion-suggestions{
+            padding:8px 16px;display:flex;flex-wrap:wrap;gap:6px;flex-shrink:0;
+            border-top:1px solid #f5e8ed;
+        }
+        .suggestion-chip{
+            background:#fff0f5;border:1px solid #f3a8c0;
+            color:#d6336c;font-size:12px;padding:5px 11px;
+            border-radius:20px;cursor:pointer;transition:all 0.2s;
+            white-space:nowrap;
+        }
+        .suggestion-chip:hover{background:#d6336c;color:#fff;border-color:#d6336c;}
+
+        /* 输入区 */
+        .dion-input-area{
+            padding:12px 14px;
+            border-top:1px solid #f5e8ed;
+            display:flex;gap:8px;align-items:flex-end;
+            flex-shrink:0;background:#fff;
+        }
+        .dion-input{
+            flex:1;border:1.5px solid #f0c0d0;border-radius:22px;
+            padding:10px 16px;font-size:14px;resize:none;
+            outline:none;font-family:inherit;line-height:1.5;
+            max-height:90px;overflow-y:auto;color:#333;
+            transition:border-color 0.2s;
+        }
+        .dion-input:focus{border-color:#d6336c;}
+        .dion-input::placeholder{color:#ccc;}
+        .dion-send{
+            width:38px;height:38px;border-radius:50%;
+            background:#d6336c;border:none;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            flex-shrink:0;transition:background 0.2s,transform 0.1s;
+        }
+        .dion-send:hover{background:#b5294f;}
+        .dion-send:active{transform:scale(0.92);}
+        .dion-send svg{width:18px;height:18px;fill:#fff;}
 
         /* 页脚 */
         .footer{
@@ -332,12 +443,43 @@
         </div>
     </div>
 
-    <!-- 侧边栏 完全还原 -->
+    <!-- 侧边栏 AI Chat -->
     <div class="sidebar">
-        <div class="side-box">
-            <h3>Chat with DION—Rediscover What Humanity Forgot</h3>
-            <p>Published by EverydayHolidaY, DION is the world’s leading cultural intelligence AI, built with the largest historical and literary databases ever assembled.</p>
-            <p>In an age where people are losing patience, memory, and emotional connection, DION helps the world remember what once made humanity feel alive.</p>
+        <div class="dion-chat" id="dionChat">
+            <!-- 头部 -->
+            <div class="dion-header">
+                <div class="dion-avatar">✦</div>
+                <div class="dion-header-info">
+                    <div class="dion-name">DION</div>
+                    <div class="dion-status"><span class="status-dot"></span>Cultural Intelligence AI</div>
+                </div>
+            </div>
+
+            <!-- 消息区 -->
+            <div class="dion-messages" id="dionMessages">
+                <div class="msg ai">
+                    <div class="msg-avatar">✦</div>
+                    <div>
+                        <div class="msg-bubble">Hello! I’m DION, your cultural intelligence companion. I’m here to help you explore history, traditions, and the human stories behind every celebration. What would you like to discover today?</div>
+                        <div class="msg-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快捷提问 -->
+            <div class="dion-suggestions" id="dionSuggestions">
+                <span class="suggestion-chip" onclick="sendChip(this)">What is Bacchanalia?</span>
+                <span class="suggestion-chip" onclick="sendChip(this)">Why do we celebrate?</span>
+                <span class="suggestion-chip" onclick="sendChip(this)">Best gifts for June?</span>
+            </div>
+
+            <!-- 输入区 -->
+            <div class="dion-input-area">
+                <textarea class="dion-input" id="dionInput" rows="1" placeholder="Ask DION anything…"></textarea>
+                <button class="dion-send" id="dionSend" onclick="sendMessage()">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -346,5 +488,112 @@
     <p>EverydayHolidaY</p>
 </div>
 
+<script>
+const responses = {
+    "what is bacchanalia": "Bacchanalia was an ancient Roman festival honoring Bacchus, the god of wine and revelry. It was known for its ecstatic rituals and communal feasting. In 2126, it was revived as a cultural response to emotional suppression — a reminder that joy, connection, and sincerity are worth celebrating.",
+    "why do we celebrate": "Celebration is how humans mark meaning. Across every culture and era, festivals serve as anchors — moments that break the monotony and remind us we're alive together. Without them, time flattens into an endless routine. DION believes every month deserves at least one reason to gather.",
+    "best gifts for june": "June is often overlooked for gifting — but that's exactly what makes a thoughtful gesture stand out! Consider: handcrafted candles, artisan food baskets, personalized journals, or experience vouchers for summer activities. EverydayHolidaY's summer collection has some wonderful options.",
+};
+
+const fallbacks = [
+    "That's a fascinating question! The historical record shows that humans have always sought meaning through ritual and celebration. What specific aspect interests you most?",
+    "Great question. Cultural traditions often carry layers of meaning that span centuries. DION's databases suggest this connects to deeper human needs for community and belonging.",
+    "Interesting! Across civilizations from ancient Mesopotamia to modern-day festivals, this pattern appears repeatedly. Would you like me to explore a particular era or culture?",
+    "From DION's analysis of over 10,000 cultural datasets, what you're describing reflects a universal human impulse — the desire to mark time with intention and shared experience.",
+];
+
+let fallbackIndex = 0;
+
+function getTime(){
+    const d=new Date();
+    return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+}
+
+function appendMsg(text, role){
+    const wrap = document.getElementById('dionMessages');
+    const div = document.createElement('div');
+    div.className = 'msg '+role;
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.textContent = role==='ai' ? '✦' : '✿';
+    const inner = document.createElement('div');
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.textContent = text;
+    const time = document.createElement('div');
+    time.className = 'msg-time';
+    time.textContent = getTime();
+    inner.appendChild(bubble);
+    inner.appendChild(time);
+    div.appendChild(avatar);
+    div.appendChild(inner);
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+}
+
+function showTyping(){
+    const wrap = document.getElementById('dionMessages');
+    const div = document.createElement('div');
+    div.className = 'msg ai';
+    div.id = 'typing';
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.textContent = '✦';
+    const ind = document.createElement('div');
+    ind.className = 'typing-indicator';
+    ind.innerHTML = '<span></span><span></span><span></span>';
+    div.appendChild(avatar);
+    div.appendChild(ind);
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+}
+
+function removeTyping(){
+    const t = document.getElementById('typing');
+    if(t) t.remove();
+}
+
+function getReply(text){
+    const lower = text.toLowerCase().trim();
+    for(const key in responses){
+        if(lower.includes(key.split(' ')[1]) || lower === key) return responses[key];
+    }
+    const r = fallbacks[fallbackIndex % fallbacks.length];
+    fallbackIndex++;
+    return r;
+}
+
+function sendMessage(){
+    const input = document.getElementById('dionInput');
+    const text = input.value.trim();
+    if(!text) return;
+    appendMsg(text, 'user');
+    input.value = '';
+    input.style.height = 'auto';
+    document.getElementById('dionSuggestions').style.display = 'none';
+    showTyping();
+    const delay = 900 + Math.random()*600;
+    setTimeout(()=>{
+        removeTyping();
+        appendMsg(getReply(text), 'ai');
+    }, delay);
+}
+
+function sendChip(el){
+    document.getElementById('dionInput').value = el.textContent;
+    sendMessage();
+}
+
+// Auto-resize textarea
+document.getElementById('dionInput').addEventListener('input', function(){
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 90) + 'px';
+});
+
+// Enter to send (Shift+Enter for newline)
+document.getElementById('dionInput').addEventListener('keydown', function(e){
+    if(e.key==='Enter' && !e.shiftKey){e.preventDefault();sendMessage();}
+});
+</script>
 </body>
 </html>
